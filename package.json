@@ -4,12 +4,17 @@
   "description": "A simple server built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon -L",
+    "test": "mocha -w ./tests/**/*.spec.js"
   },
-  "author": "A.Monar: Henry's Student ",
+  "author": "A.Monar: Henry's Student",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.1",
@@ -19,7 +24,7 @@
     "node": ">=14.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "url": ""
   },
   "license": "ISC",
   "keywords": [
@@ -28,6 +33,11 @@
     "express"
   ],
   "devDependencies": {
-    "eslint": "^8.44.0"
+    "chai": "^4.3.7",
+    "eslint": "^8.44.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3",
+    "supertest-session": "^4.1.0"
   }
 }
