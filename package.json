@@ -1,14 +1,12 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "name": "api",
+  "version": "1.0.0",
+  "description": "A simple server built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "author": "A.Monar: Henry's Student ",
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -23,10 +21,13 @@
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
   },
-  "license": "MIT",
+  "license": "ISC",
   "keywords": [
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.44.0"
+  }
 }
