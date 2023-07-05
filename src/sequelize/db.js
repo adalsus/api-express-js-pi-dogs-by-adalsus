@@ -1,15 +1,21 @@
 require('dotenv').config();
 const { fdeco } = require('../fns/fnsApi.js');
 
-const { DB_USER,DB_PASSWORD,DB_HOST,DB_PORT,DB_NAME,API_KEY,EP_BREEDS_TDA } = process.env;
+const { DB_USER,DB_PASSWORD,DB_HOST,DB_PORT,DB_NAME,API_KEY,EP_BREEDS_TDA,URI_CLOUD } = process.env;
 const _DB_USER = fdeco(JSON.parse(DB_USER))
 const _DB_PASSWORD = fdeco(JSON.parse(DB_PASSWORD))
 const _API_KEY = fdeco(JSON.parse(API_KEY))
+const _URI_CLOUD = fdeco(JSON.parse(URI_CLOUD))
 
-const soyAdalbertoMonar = "SI" 
-const postgresql_uri = ( soyAdalbertoMonar==='SI' )
-?`postgres://${_DB_USER}:${_DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
-:`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+const eresAdalbertoMonar = "SI"
+const PostgreSQL_LOCAL = "NO"
+const postgresql_uri = ( eresAdalbertoMonar==='SI' )
+?(PostgreSQL_LOCAL==='SI')
+  ?`postgres://${_DB_USER}:${_DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+  :`postgres://${_URI_CLOUD}`
+:(PostgreSQL_LOCAL==='SI')
+  ?`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+  :`postgres://${URI_CLOUD}`
 
 const { Sequelize } = require('sequelize')
 const sequelize = new Sequelize( postgresql_uri,{
