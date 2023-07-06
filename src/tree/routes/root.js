@@ -1,7 +1,8 @@
 const endpoint = require('express').Router();
+const { PORT } = process.env;
 
 endpoint.get("/", (req, res) => {
-   res.send('Your app is listening on port 3001<br>'+
+   res.send(`Your app is listening on port ${PORT}<br>`+
             'The connection with PostgreSQL has been successfully established.<br>'+
             'Dogs Model is already coincident!<br>'+
             'Temperaments Model is already coincident!<br>'+

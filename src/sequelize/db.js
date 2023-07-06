@@ -62,13 +62,14 @@ const dbConnection = async() => {
     const { Dogs } = sequelize.models;
     // Aca vendrian las relaciones
     // Un PK idTemps(Temps) muchos FK id_Temps(Dogs) --> Se usa pareja .hasMany y .belongsTo
-    Temps.hasMany(Dogs,{ foreignKey:{name:'id_Temps'} }) //Con propiedad name le indico que este FK name quiero
-    Dogs.belongsTo(Temps,{ foreignKey:{name:'id_Temps'} });
+    Temps.hasMany(Dogs,{ foreignKey:{name:'id_Temps'} })//Con name le indico que este FK name quiero en Dogs
+    Dogs.belongsTo(Temps,{ foreignKey:{name:'id_Temps'} })//Con name le indico que este FK está en Dogs
 
     //Necesitaré otra relación más, la referencio a continuación
     //Un PK id(Dogs) un FK id_Dogs(Temps) --> Se usa pareja .hasOne y .belongsTo
-    Dogs.hasOne(Temps,{ foreignKey:{name:'id_Dogs'} }) //Con propiedad name le indico que este FK name quiero
-    Temps.belongsTo(Dogs,{ foreignKey:{name:'id_Dogs'} });
+    Dogs.hasOne(Temps,{ foreignKey:{name:'id_Dogs'} })//Con name le indico que este FK name quiero en Temps
+    Temps.belongsTo(Dogs,{ foreignKey:{name:'id_Dogs'} })//Con name le indico que este FK está en Temps
+     
     const { to_sync } = require('../fns/fnsApi.js')
     await to_sync(sequelize,{alter:true},"Associations already in place!!!")
 
