@@ -28,10 +28,10 @@ const Dogs = async (sequelize) => {
         type: DataTypes.STRING(25),
         allowNull: false,
       },
-      id_Temps: {
+      /*id_Temps: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      },
+      },*/ // Lo comento ya que a lo que haga la relación se creará este campo y será FK
       reference_image_id: {
         type: DataTypes.STRING(55),
       },
@@ -40,16 +40,10 @@ const Dogs = async (sequelize) => {
       },
     }, { timestamps: false }
   );
-  try {
-    await sequelize.sync({ alter: true })
-    .then(
-      () => console.log("Dogs Model is already coincident!")
-    )
-  } catch(error) {
-    console.log(error.message);
-  }
+  const { to_sync } = require('../../fns/fnsApi')
+  await to_sync(sequelize.models.Dogs,{alter:true},"Dogs Model is already coincident!")
 };
 
 
 
-module.exports = Dogs;
+module.exports = { Dogs };

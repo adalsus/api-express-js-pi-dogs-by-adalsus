@@ -32,9 +32,21 @@ const antepongo = (prefijo,numero) => {
    return parseInt(`${prefijo}${numero}`)
 }
 
+const to_sync = async (UnoTodos,option,mensaje) => {
+   try {
+      await UnoTodos.sync(option)
+      .then(
+        () => {if (mensaje!==null) return console.log(mensaje)}
+      )
+   } catch(error) {
+      console.log(error.message);
+   }
+}
+
 module.exports = { 
    fdeco, 
    last_idDogs,
    last_idBreeds,
    antepongo,
+   to_sync,
 };

@@ -7,10 +7,11 @@ const _URI_CLOUD = fdeco(JSON.parse(URI_CLOUD))
 const eresAdalbertoMonar = "SI"//<-- Cambia sólo aquí a NO en caso de ser otro Programmer 
 const PostgreSQL_LOCAL = "NO"
 
+let _DB_USER,_DB_PASSWORD,_API_KEY
 if (eresAdalbertoMonar==='SI' && PostgreSQL_LOCAL==='SI') {
-  const _DB_USER = fdeco(JSON.parse(DB_USER))
-  const _DB_PASSWORD = fdeco(JSON.parse(DB_PASSWORD))
-  const _API_KEY = fdeco(JSON.parse(API_KEY))
+  _DB_USER = fdeco(JSON.parse(DB_USER))
+  _DB_PASSWORD = fdeco(JSON.parse(DB_PASSWORD))
+  _API_KEY = fdeco(JSON.parse(API_KEY))
 }
 
 const postgresql_uri = (eresAdalbertoMonar==='SI')
@@ -36,13 +37,10 @@ const dbConnection = async() => {
     await sequelize.authenticate();
 
     console.log('The connection with PostgreSQL has been successfully established.');
-    
-    const Dogs = require('./models/Dogs.js');
-    await Dogs(sequelize);
-    const Temperaments = require('./models/Temperaments.js');
-    await Temperaments(sequelize);
-    const Temps = require('./models/Temps.js');
-    await Temps(sequelize);
+
+    await (require('./models/Dogs.js').Dogs)(sequelize);
+    await (require('./models/Temperaments.js').Temperaments)(sequelize);
+    await (require('./models/Temps.js').Temps)(sequelize);
 
     
     /*let last_id
@@ -60,11 +58,19 @@ const dbConnection = async() => {
 
     //En sequelize.models están todos los modelos importados como propiedades
     // Para relacionarlos hacemos un destructuring
-    // const { Dogs } = sequelize.models;
+    const { Temps } = sequelize.models;
+    const { Dogs } = sequelize.models;
     // Aca vendrian las relaciones
-    // Product.hasMany(Reviews);
+    // Un PK idTemps(Temps) muchos FK id_Temps(Dogs) --> Se usa pareja .hasMany y .belongsTo
+    Temps.hasMany(Dogs,{ foreignKey:{name:'id_Temps'} }) //Con propiedad name le indico que este FK name quiero
+    Dogs.belongsTo(Temps,{ foreignKey:{name:'id_Temps'} });
 
-
+    //Necesitaré otra relación más, la referencio a continuación
+    //Un PK id(Dogs) un FK id_Dogs(Temps) --> Se usa pareja .hasOne y .belongsTo
+    Dogs.hasOne(Temps,{ foreignKey:{name:'id_Dogs'} }) //Con propiedad name le indico que este FK name quiero
+    Temps.belongsTo(Dogs,{ foreignKey:{name:'id_Dogs'} });
+    const { to_sync } = require('../fns/fnsApi.js')
+    await to_sync(sequelize,{alter:true},"Associations already in place!!!")
 
 
   } catch (error) {

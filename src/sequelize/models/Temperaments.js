@@ -19,16 +19,10 @@ const Temperaments = async (sequelize) => {
       },
     }, { timestamps: false }
   );
-  try {
-    await sequelize.sync({ alter: true })
-    .then(
-      () => console.log("Temperaments Model is already coincident!")
-    )
-  } catch(error) {
-    console.log(error.message);
-  }
+  const { to_sync } = require('../../fns/fnsApi')
+  await to_sync(sequelize.models.Temperaments,{alter:true},"Temperaments Model is already coincident!")
 };
 
 
 
-module.exports = Temperaments;
+module.exports = { Temperaments };

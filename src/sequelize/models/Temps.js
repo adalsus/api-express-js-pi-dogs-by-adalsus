@@ -17,22 +17,16 @@ const Temps = async (sequelize) => {
         type: DataTypes.STRING(200),
         allowNull: false,
       },
-      id_Dogs: {
+      /*id_Dogs: {
          type: DataTypes.INTEGER,
          allowNull: false,
-      },
+      },*/ // Lo comento ya que a lo que haga la relación se creará este campo y será FK
     }, { timestamps: false }
   );
-  try {
-    await sequelize.sync({ alter: true })
-    .then(
-      () => console.log("The model for the Temperament Set is already coincident!")
-    )
-  } catch(error) {
-    console.log(error.message);
-  }
+  const { to_sync } = require('../../fns/fnsApi')
+  await to_sync(sequelize.models.Temps,{alter:true},"The model for the Temperament Set is already coincident!")
 };
 
 
 
-module.exports = Temps;
+module.exports = { Temps };
