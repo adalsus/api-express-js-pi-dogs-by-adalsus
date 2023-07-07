@@ -1,5 +1,7 @@
+require('dotenv').config()
 const endpoint = require('express').Router();
 const { PORT } = process.env;
+
 
 endpoint.get("/", (req, res) => {
    res.send(`Your app is listening on port ${PORT}<br>`+
@@ -9,5 +11,7 @@ endpoint.get("/", (req, res) => {
             'The model for the Temperament Set is already coincident!<br>'+
             'Associations already in place!!!<br>');
 });
+
+
 
 module.exports = endpoint;
