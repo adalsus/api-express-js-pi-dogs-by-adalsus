@@ -41,7 +41,8 @@ const Dogs = async (sequelize) => {
     }, { timestamps: false }
   );
   const { to_sync } = require('../../fns/fnsApi')
-  await to_sync(sequelize.models.Dogs,{alter:true},"Dogs Model is already coincident!")
+  let { optionSYNC } = require('../db.js')
+  await to_sync(sequelize.models.Dogs,optionSYNC,"Dogs Model is already coincident!")
 };
 
 

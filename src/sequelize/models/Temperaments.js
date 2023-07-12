@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
-const Temperaments = async (sequelize) => {
+const Temperaments = async (sequelize,optionSYNC,messcompl) => {
   
   // defino el modelo
   sequelize.define('Temperaments', {
@@ -20,7 +20,8 @@ const Temperaments = async (sequelize) => {
     }, { timestamps: false }
   );
   const { to_sync } = require('../../fns/fnsApi')
-  await to_sync(sequelize.models.Temperaments,{alter:true},"Temperaments Model is already coincident!")
+  //let { optionSYNC } = require('../db.js')
+  await to_sync(sequelize.models.Temperaments,optionSYNC,`Temperaments Model is already ${messcompl}!`)
 };
 
 

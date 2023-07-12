@@ -10,6 +10,7 @@ dbConnection();
 //listen for requests :)
 const listener = server.listen(PORT, function(error) {
   if (!error) { 
+    //require('./src/fns/fnsApi.js').removeFile('./src/var/dataGt_g.json')
     console.log("Your app is listening on port " + listener.address().port);
   }
   else { console.log(error.message) }
