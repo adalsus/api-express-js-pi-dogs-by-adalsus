@@ -304,7 +304,7 @@ const searchTemps = async (dataJSON) => {
       
       //Inicia proceso de buscar en la db si existe esta combinacion de temperamentos
       let value_sCT_db = await searchCombTemps_db(orden_dataJSON(dataJSON))
-      console.log('obj enc -> ', value_sCT_db)
+      //console.log('obj enc -> ', value_sCT_db)
       //Fin proceso de buscar en la db si existe esta combinacion de temperamentos
 
       //Retorno lo que encontró

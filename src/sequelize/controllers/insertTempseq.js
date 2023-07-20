@@ -7,6 +7,7 @@ const insertTempseq = async (dataJSON) => {
       const { searchTemps } = require('../../fns/fnsApi.js')
       const valueJSON_sT = await searchTemps(dataJSON)
       if (valueJSON_sT===undefined) {
+         require('../../fns/fnsApi.js').removeFile('./src/var/dataGt_g.json')
          const { orden_dataJSON } = require('../../fns/fnsApi.js')
          const formoNewCombi = { 'namesTemps':orden_dataJSON(dataJSON) }
          //console.log(formoNewCombi)
