@@ -2,10 +2,11 @@ require('dotenv').config();
 const endpoint = require('express').Router();
 const { EP_BREEDS_TDA,EP_BREEDS_LC } = process.env;
 const { _API_KEY } = require('../../sequelize/db.js');
+const { con_API_EXTERNA } = require('../../../confpara.js')
 
 
 
-const You_will_work_with_external_API = 'SI' //<-Modifique a NO si trabajará con su API-example
+const You_will_work_with_external_API = con_API_EXTERNA
 
 
 
@@ -45,10 +46,10 @@ endpoint.post('/', bodyParser.json(), async (req, res) => {
    const dataJSON = req.body
    const insertDogSeq = require('../../sequelize/controllers/insertDogSeq.js')
    let result = await insertDogSeq(dataJSON,hostname,_API_KEY)
-   res.json(result)
    require('../../fns/fnsApi.js').removeFile('./src/var/dataGt_g.json')
    const { gDataGt } = require('../../fns/fnsApi.js')
    let dataJSONGt = await gDataGt(hostname,_API_KEY)
+   res.json(result)
 })
 
 

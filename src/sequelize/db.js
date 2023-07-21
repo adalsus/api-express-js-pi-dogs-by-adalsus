@@ -1,14 +1,20 @@
 require('dotenv').config();
 const { fdeco } = require('../fns/fnsApi.js');
+const { 
+  eres_ADALBERTO_MONAR, 
+  willWork_con_PostgreSQL_LOCAL, 
+  restart_ASSOCIATIONS 
+} = require('../../confpara.js');
+
 
 const { DB_USER,DB_PASSWORD,DB_HOST,DB_PORT,DB_NAME,API_KEY,EP_BREEDS_TDA,URI_CLOUD } = process.env;
 const _URI_CLOUD = fdeco(JSON.parse(URI_CLOUD))
 
 
 
-const eresAdalbertoMonar = "SI"//<-- Cambiar sólo aquí a NO en caso de ser otro Programmer 
-const PostgreSQL_LOCAL = "NO"
-const reiniciarLasAsociaciones = 'NO'//<-- Cambiar a SI, si desea perder las Asociaciones ya creadas
+const eresAdalbertoMonar = eres_ADALBERTO_MONAR 
+const PostgreSQL_LOCAL = willWork_con_PostgreSQL_LOCAL
+const reiniciarLasAsociaciones = restart_ASSOCIATIONS
 
 
 
