@@ -46,9 +46,9 @@ endpoint.post('/', bodyParser.json(), async (req, res) => {
    const dataJSON = req.body
    const insertDogSeq = require('../../sequelize/controllers/insertDogSeq.js')
    let result = await insertDogSeq(dataJSON,hostname,_API_KEY)
-   require('../../fns/fnsApi.js').removeFile('./src/var/dataGt_g.json')
-   const { gDataGt } = require('../../fns/fnsApi.js')
-   let dataJSONGt = await gDataGt(hostname,_API_KEY)
+   //require('../../fns/fnsApi.js').removeFile('./src/var/dataGt_g.json')
+   //const { gDataGt } = require('../../fns/fnsApi.js')
+   //let dataJSONGt = await gDataGt(hostname,_API_KEY)
    res.json(result)
 })
 
