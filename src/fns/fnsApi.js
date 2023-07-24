@@ -43,10 +43,16 @@ const to_sync = async (UnoTodos,option,mensaje) => {
    }
 }
 
+//Funcion interna que Ordena Arrays
+function sortDogsBy(property, data) {  
+   return data.sort((a, b) => {
+      return a[property] >= b[property] ? 1 : -1
+   })
+}//Fin instrucciones de Funcion interna que Ordena Arrays
 const gDataGt = async (hostname,_API_KEY) => {
    let fs = require('fs')
-   let dataGt_l_ordById
 
+   let dataGt_l_ordById
    if (!fs.existsSync('./src/var/dataGt_g.json')) {   
    
       let dataGt_l
@@ -97,40 +103,73 @@ const gDataGt = async (hostname,_API_KEY) => {
             })   
          }
       }
-
-            
-
-      //Inicia proceso de traer los registros de la db
-      const getDogseq = require('../sequelize/controllers/getDogseq.js')
-      const valuesDogseq = await getDogseq()
-      //console.log(valuesDogseq)
-      if (valuesDogseq.length!==0) {
-            if (valuesDogseq!==undefined) { 
-                  if (dataGt_l.length!==undefined) {
-                     dataGt_l.push(...valuesDogseq)
-                  } else {
-                     dataGt_l = valuesDogseq
-                  } 
-            }
-      }
-      //Fin proceso de traer los registros de la db
-
-
-      function sortDogsBy(property) {  
-         return dataGt_l.sort((a, b) => {
-            return a[property] >= b[property] ? 1 : -1
-         })
-      }
-      dataGt_l_ordById = sortDogsBy('id')
+      dataGt_l_ordById = sortDogsBy('id',dataGt_l)
       var writeStream = fs.createWriteStream('./src/var/dataGt_g.json');
       writeStream.write(JSON.stringify(dataGt_l_ordById, null, 2))
       writeStream.end();
+
+
+
+
+      //Inicia proceso de traer los registros de la db
+      //console.log('dataGt_l_ordById.length')
+      //console.log(dataGt_l_ordById.length)
+      const getDogseq = require('../sequelize/controllers/getDogseq.js')
+      const valuesDogseq = await getDogseq()
+      
+      //console.log('valuesDogseq')
+      //console.log(valuesDogseq)
+      //console.log('valuesDogseq.length')
+      //console.log(valuesDogseq.length)
+      if (valuesDogseq.length!==0) {
+         if (valuesDogseq!==undefined) { 
+               let valuesDogseq_ordById = sortDogsBy('id',valuesDogseq)
+               if (dataGt_l_ordById.length!==undefined) {
+                     dataGt_l_ordById.push(...valuesDogseq_ordById)
+               } else {
+                     dataGt_l_ordById = valuesDogseq_ordById
+               } 
+         }
+      }
+      //Fin proceso de traer los registros de la db
+
+      return dataGt_l_ordById
+
+
+
    } else {
       //console.log('usa require')
-      dataGt_l_ordById = require('../var/dataGt_g.json')
-   }
+      const dataGt_l_ordById_require = require('../var/dataGt_g.json')
+      dataGt_l_ordById = [...dataGt_l_ordById_require]
 
-   return dataGt_l_ordById
+
+      //Inicia proceso de traer los registros de la db
+      //console.log('else')
+      //console.log('dataGt_l_ordById.length')
+      //console.log(dataGt_l_ordById.length)
+      const getDogseq = require('../sequelize/controllers/getDogseq.js')
+      const valuesDogseq = await getDogseq()
+      //console.log('valuesDogseq')
+      //console.log(valuesDogseq)
+      //console.log('valuesDogseq.length')
+      //console.log(valuesDogseq.length)
+      if (valuesDogseq.length!==0) {
+         if (valuesDogseq!==undefined) {
+               let valuesDogseq_ordById = sortDogsBy('id',valuesDogseq) 
+               if (dataGt_l_ordById.length!==undefined) {
+                     dataGt_l_ordById.push(...valuesDogseq_ordById)
+               } else {
+                     dataGt_l_ordById = valuesDogseq_ordById
+               } 
+         }
+      }
+      //Fin proceso de traer los registros de la db
+   
+      
+      return dataGt_l_ordById
+   }   
+
+   
 }
 
 const gDataGtQname = async (url_search,name) => {

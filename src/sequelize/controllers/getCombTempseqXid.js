@@ -1,5 +1,6 @@
 const { objSeq } = require('../db.js')
 
+/*
 const getCombTempseqXid = async id => {
    let valorCombTempseq
    if (objSeq.models.Temps!==undefined) {
@@ -15,6 +16,7 @@ const getCombTempseqXid = async id => {
    }
    return valorCombTempseq
 }
+*/
 
 
 module.exports = getCombTempseqXid

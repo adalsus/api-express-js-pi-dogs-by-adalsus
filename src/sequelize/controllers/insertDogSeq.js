@@ -9,6 +9,7 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
       dataJSON.id = valueLast_id + 1
 
 
+      /*
       let p_dataGt_g = require('../../var/dataGt_g.json')
       //console.log(p_dataGt_g)
       
@@ -29,6 +30,7 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
             dataJSON["Temp"] = {"namesTemps": valor_namesTemps}
          }
       }
+      */
 
 
       let p_dataJSON_n = JSON.parse(JSON.stringify(dataJSON, null, 2))
