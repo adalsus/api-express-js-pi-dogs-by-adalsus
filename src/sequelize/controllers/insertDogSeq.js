@@ -33,8 +33,10 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
       */
 
 
-      let p_dataJSON_n = JSON.parse(JSON.stringify(dataJSON, null, 2))
-      p_dataGt_g.push(p_dataJSON_n)
+      //let p_dataJSON_n = JSON.parse(JSON.stringify(dataJSON, null, 2))
+      //p_dataGt_g.push(p_dataJSON_n)
+            
+      /*
       const fs = require('fs');
       // add new content update of the JSON file
       try {
@@ -44,6 +46,8 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
             JSON.stringify(p_dataGt_g, null, 2)
          )
       } catch (e) { console.log(e); }
+      */
+
 
 
       return await objSeq.models.Dogs.create(dataJSON)
