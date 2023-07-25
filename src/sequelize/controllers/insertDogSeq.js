@@ -9,8 +9,8 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
       dataJSON.id = valueLast_id + 1
 
 
-      /*
-      let p_dataGt_g = require('../../var/dataGt_g.json')
+      
+      //let p_dataGt_g = require('../../var/dataGt_g.json')
       //console.log(p_dataGt_g)
       
       //console.log('dataJSON.id_Temps-> ',dataJSON.id_Temps)
@@ -22,31 +22,31 @@ const insertDogSeq = async (dataJSON,hostname,_API_KEY) => {
          const valueCombTempseq = await getCombTempseqXid(dataJSON.id_Temps)
          //console.log('valueCombTempseq')
          //console.log(valueCombTempseq)
-         if (valueCombTempseq!==undefined) { 
-            valor_namesTemps = valueCombTempseq.namesTemps
-         } else { dataJSON.id_Temps = null }
+         if (valueCombTempseq===undefined) { 
+            dataJSON.id_Temps = null
+         } else { valor_namesTemps = valueCombTempseq.namesTemps }
          //Fin proceso de traer, si es que existe, la combinación de temperamentos, de aquel id, en la db
-         if (valor_namesTemps!==null) {
-            dataJSON["Temp"] = {"namesTemps": valor_namesTemps}
-         }
+         //if (valor_namesTemps!==null) {
+         //   dataJSON["Temp"] = {"namesTemps": valor_namesTemps}
+         //}
+      } else {
+         dataJSON.id_Temps = null
       }
-      */
+      
 
 
       //let p_dataJSON_n = JSON.parse(JSON.stringify(dataJSON, null, 2))
       //p_dataGt_g.push(p_dataJSON_n)
             
-      /*
-      const fs = require('fs');
+      //const fs = require('fs');
       // add new content update of the JSON file
-      try {
+      //try {
          //console.log(p_dataGt_g, null, 2)
-         fs.writeFileSync(
-            './src/var/dataGt_g.json',
-            JSON.stringify(p_dataGt_g, null, 2)
-         )
-      } catch (e) { console.log(e); }
-      */
+      //   fs.writeFileSync(
+      //      './src/var/dataGt_g.json',
+      //      JSON.stringify(p_dataGt_g, null, 2)
+      //   )
+      //} catch (e) { console.log(e); }
 
 
 
