@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
-  "author": "A.Monar: Henry's Student",
+  "author": "ADALSUS : Adalberto Monar",
   "dependencies": {
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
