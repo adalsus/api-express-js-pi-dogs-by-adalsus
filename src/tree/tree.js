@@ -1,3 +1,4 @@
+var cors = require('cors')
 const root = require('./routes/root.js')
 const dogs = require('./routes/dogs.js')
 const temperaments = require('./routes/temperaments.js')
@@ -5,6 +6,7 @@ const temps = require('./routes/temps.js')
 
 const tree = app => {
    
+   app.use(cors())
    app.use('/', root)
    app.use('/dogs', dogs)
    app.use('/temperaments', temperaments)
